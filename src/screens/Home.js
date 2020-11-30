@@ -4,7 +4,7 @@ import { SafeAreaView, View, Text, StyleSheet, Image, TouchableWithoutFeedback, 
 import commonStyles from '../commonStyles'
 
 const FadeInView = (props) => {
-    const fadeAnim = useRef(new Animated.Value(0)).current  // Initial value for opacity: 0
+    const fadeAnim = useRef(new Animated.Value(0)).current
   
     React.useEffect(() => {
       Animated.timing(
@@ -18,10 +18,10 @@ const FadeInView = (props) => {
     }, [fadeAnim])
   
     return (
-      <Animated.View                 // Special animatable View
+      <Animated.View                 
         style={{
           ...props.style,
-          opacity: fadeAnim,         // Bind opacity to animated value
+          opacity: fadeAnim,         
         }}
       >
         {props.children}

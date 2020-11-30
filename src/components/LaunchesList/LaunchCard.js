@@ -5,11 +5,11 @@ import commonStyles from '../../commonStyles';
 
 export default props => {
     const navigation = useNavigation();
-
+    
     return (
-        <TouchableWithoutFeedback onPress={() => navigation.navigate('LaunchDetails', props.item) }>
+        <TouchableWithoutFeedback onPress={() => navigation.navigate('LaunchDetails', {item: props.item}) }>
             <View style={styles.item}>
-                <Image source={require('../../../assets/imgs/astronaut.jpg')} style={{ width: 100, height: 100 }}></Image>
+                <Image source={{ uri: props.image }} style={{ width: 100, height: 100 }}></Image>
                 <Text style={styles.title}>{props.name}</Text>
                 <Text style={styles.subtitle}>{props.name}</Text>
             </View>
