@@ -15,7 +15,7 @@ export default props => {
                 </View>
                 <View style={styles.content}>
                     <Text style={styles.title}>{props.name}</Text>
-                    <Text style={styles.subtitle}>{props.name}</Text>
+                    <Text style={styles.subtitle}>Lançado: {props.launched ? 'Sim' : 'Não'}</Text>
                 </View>
             </View>
         </TouchableWithoutFeedback>
