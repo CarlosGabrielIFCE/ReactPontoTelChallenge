@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { SafeAreaView, View, Text, Image, StyleSheet } from 'react-native'
+import { SafeAreaView, View, Text, Image, StyleSheet, TouchableWithoutFeedback } from 'react-native'
 import { Button } from 'react-native-elements'
 import commonStyles from '../commonStyles'
 
@@ -16,17 +16,19 @@ export default class LaunchDetails extends Component {
     render() {
         const { navigation } = this.props
         const { item } = this.state
-        // let { item } = this.state
-        // item = navigation.getParam('item')
         return (
             <SafeAreaView style={commonStyles.container}>
                 <View style={styles.contentCard}>
-                    <Image source={require('../../assets/imgs/astronaut.jpg')} style={styles.image} />
+                    <Image source={{ uri: item.links.patch.small }} style={styles.image} />
                     <Text style={styles.title}>{item.name}</Text>
                     <Text style={styles.subtitle}>Subtitle</Text>
-                    <Text style={styles.paragraph}>Assistir o vídeo do lançamento</Text>
-                    <Text style={[styles.paragraph]}>Ler o Artigo sobre o lançamento</Text>
-                    <Button title="Voltar" type="clear" titleStyle={{ fontFamily: commonStyles.fontFamily2, color: '#000'}} onPress={() => navigation.goBack()}/>
+                    <TouchableWithoutFeedback onPress={() => navigation.navigate('LaunchItemYoutubeVideo', { item: item })}>
+                        <Text style={[styles.paragraph]}>Assistir a um vídeo sobre o lançamento</Text>
+                    </TouchableWithoutFeedback>
+                    <TouchableWithoutFeedback onPress={() => navigation.navigate('LaunchItemWebView', { item: item})}>
+                        <Text style={[styles.paragraph]}>Ler o Artigo sobre o lançamento</Text>
+                    </TouchableWithoutFeedback>
+                    <Button title="Voltar" type="clear" titleStyle={{ fontFamily: commonStyles.fontFamily2, color: '#000' }} onPress={() => navigation.goBack()} />
                 </View>
             </SafeAreaView>
         )
@@ -44,8 +46,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF'
     },
     image: {
-        width: 300,
-        height: 300
+        width: 200,
+        height: 200
     },
     title: {
         fontSize: 50,

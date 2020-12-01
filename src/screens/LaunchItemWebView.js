@@ -1,18 +1,20 @@
-import React, { Component } from 'react';
-import { SafeAreaView } from 'react-native'
+import React from 'react';
+import { SafeAreaView, StyleSheet, View } from 'react-native'
 import { WebView } from 'react-native-webview';
+import { Button } from 'react-native-elements'
 
 import commonStyles from '../commonStyles'
 
-export default class LaunchItemWebView extends Component {
-  render() {
-    return (
-      <SafeAreaView style={{flex: 1, backgroundColor: commonStyles.container.backgroundColor}}>
-        <WebView
-          source={{ uri: 'https://alexb72.medium.com/how-to-add-pagination-to-a-react-native-flatlist-ce2425d02f1a' }}
-          style={{ marginTop: 20 }}
+export default props => {
+  const { item } = props.route.params
+
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: commonStyles.container.backgroundColor }}>
+        <WebView 
+          source={{ uri: item.links.article }}
+          style={{ marginTop: 20, marginLeft: 20, marginRight: 20, marginBottom: 50,  borderRadius: 5 }}
         />
-      </SafeAreaView>
-    );
-  }
+        <Button title='Voltar' buttonStyle={{ backgroundColor: '#FFF'}} titleStyle={{ color: commonStyles.container.backgroundColor, fontFamily: commonStyles.fontFamily2}} onPress={() => props.navigation.goBack()} />
+    </SafeAreaView>
+  );
 }

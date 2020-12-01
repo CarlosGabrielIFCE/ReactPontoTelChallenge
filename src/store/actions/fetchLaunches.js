@@ -2,13 +2,17 @@ import { FETCH_LAUNCHES_SUCCESS, FETCH_LAUNCHES_FAILURE, FETCHING_LAUNCHES } fro
 import axios from 'axios';
 
 export function fetchLaunches(page) {
+    console.log('oi')
     return (dispatch) => {
-        const options= {
-            limit: 16,
-            page: page
+        const data = {
+            query: {},
+            options: {
+                limit: 6,
+                page: page
+            }
         }
         dispatch(getLaunches())
-        axios.post('https://api.spacexdata.com/v4/launches/query', JSON.stringify(options))
+        axios.post('https://api.spacexdata.com/v4/launches/query', data)
             .then(function (response) {
                 return (dispatch(getLaunchesSuccess(response.data.docs)))
             })

@@ -1,6 +1,5 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SafeAreaView, View, Text, Image, StyleSheet, FlatList } from 'react-native'
-import axios from 'axios'
 
 import commonStyles from '../commonStyles'
 
@@ -11,6 +10,10 @@ import { fetchLaunches } from '../store/actions/fetchLaunches';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+// Date import
+import moment from 'moment'
+import 'moment/locale/pt-br'
+
 export default props => {
     const [search, setSearch] = useState('')
     const [loading, setLoading] = useState(false)
@@ -18,8 +21,14 @@ export default props => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(fetchLaunches(page))
-    }, [dispatch, page])
+    }, [])
     const { launches } = useSelector(state => state)
+    const today = moment().locale('pt-br').format('ddd, D [de] MMMM')
+
+    const loadWhenListEnds = () => {
+        setPage(page + 1)
+        dispatch(fetchLaunches(page + 1))
+    } 
 
     const searchFilterFunction = (text) => {
         setSearch(text)
@@ -34,9 +43,10 @@ export default props => {
             <View style={styles.content}>
                 <FlatList data={filteredData}
                     numColumns={2}
-                    keyExtractor={item => item.id}
+                    keyExtractor={item => `${item.id}`}
+                    onEndReached={loadWhenListEnds}
+                    onEndReachedThreshold={0.1}
                     renderItem={({ item }) => {
-                        console.log(item.links.patch.small)
                         return (
                             <LaunchCard name={item.name} item={item} image={item.links.patch.small}></LaunchCard>
                         )
@@ -55,7 +65,7 @@ export default props => {
                 </View>
                 <View style={styles.textHeader}>
                     <Text style={styles.text}>Lançamentos</Text>
-                    <Text style={styles.text}>Hoje, 28 de Novembro de 2020</Text>
+                    <Text style={styles.text}>Hoje, {today}</Text>
                 </View>
             </View>
             <LaunchSearchBar onChangeText={(text) => searchFilterFunction(text)}

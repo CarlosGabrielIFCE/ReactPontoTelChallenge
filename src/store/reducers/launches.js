@@ -18,7 +18,7 @@ export default function launchesReducer(state = initialState, action) {
             return {
                 ...state,
                 isFetching: false,
-                launches: action.data
+                launches: [ ...state.launches, ...action.data]
             }
         case FETCH_LAUNCHES_FAILURE:
             return {

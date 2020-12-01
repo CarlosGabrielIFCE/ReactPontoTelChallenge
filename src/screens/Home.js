@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react'
 import { SafeAreaView, View, Text, StyleSheet, Image, TouchableWithoutFeedback, Animated } from 'react-native'
+import { useNavigation } from '@react-navigation/native';
 
 import commonStyles from '../commonStyles'
 
@@ -29,10 +30,7 @@ const FadeInView = (props) => {
     );
   }
 
-export default props => {
-    const onPress = () => {
-        props.navigation.navigate('LaunchesList')   
-    }
+export default ({navigation}) => {
     return (
         <SafeAreaView style={commonStyles.container}>
             <View style={styles.header}>
@@ -46,7 +44,7 @@ export default props => {
                 </View>
                 </FadeInView>
                 <View style={styles.footer}>
-                    <TouchableWithoutFeedback onPress={onPress}>
+                    <TouchableWithoutFeedback onPress={() => navigation.navigate('LaunchesListV2')}>
                         <View>
                             <Text style={[styles.subtitle, { textAlign: 'center' }]}>Clique aqui e embarque nessa emoção!</Text>
                         </View>

@@ -10,6 +10,8 @@ target 'spaceApp' do
 
   pod 'react-native-webview', :path => '../node_modules/react-native-webview'
 
+  pod 'RCTYouTube', :path => '../node_modules/react-native-youtube'
+
   target 'spaceAppTests' do
     inherit! :complete
     # Pods for testing
