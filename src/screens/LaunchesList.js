@@ -1,165 +1,81 @@
-import React, { Component, useState } from 'react';
-import { SafeAreaView, View, Text, Image, StyleSheet, FlatList } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { SafeAreaView, View, StyleSheet, FlatList } from 'react-native'
+import { useDispatch, useSelector } from 'react-redux'
 
 import commonStyles from '../commonStyles'
 
-import LaunchCard from '../components/LaunchesList/LaunchCard';
-import LaunchSearchBar from '../components/LaunchesList/LaunchSearchBar';
+import { fetchLaunches } from '../store/actions/actions'
 
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { fetchLaunches } from '../store/actions/fetchLaunches';
+import Header from '../components/LaunchesList/LaunchesListHeader'
+import LaunchCard from '../components/LaunchesList/LaunchCard'
+import LaunchSearchBar from '../components/LaunchesList/LaunchSearchBar'
 
-import { useDispatch } from 'react-redux';
+export default () => {
+    // Declaração de Variáveis usando Hooks
+    const [search, setSearch] = useState('')
+    const [page, setPage] = useState(1)
+    const dispatch = useDispatch()
+    // Semelhante ao ComponentDidMount
+    useEffect(() => {
+        dispatch(fetchLaunches(page))
+    }, [])
+    // Recebe a variável armazenada no Store
+    const { launches } = useSelector(state => state.launches)
 
-class LaunchesList extends Component {
+    // Função de paginação automática
+    const loadWhenListEnds = () => {
+        setPage(page + 1)
+        dispatch(fetchLaunches(page + 1))
+    } 
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            search: '',
-            filteredDataSource: [],
-            masterDataSource: [],
-            loading: true,
-            loadingExtraData: false,
-            page: 1
-        }
-        this.shouldComponentRender = this.shouldComponentRender.bind(this);
-        this.loadMoreItems = this.loadMoreItems.bind(this);
+    // Função disparada quando o usuário insere um texto
+    // no SearchBar
+    const searchFilterFunction = (text) => {
+        setSearch(text)
     }
 
-    loadMoreItems(dispatch) {
-        const { page } = this.state;
-        this.setState({page:page+1})
-        dispatch(this.props.fetchLaunches(this.state.page))
-        this.setState({ masterDataSource: this.props.launches.launches})
-    }
+    // Função que realiza o filtro do conteúdo pelo
+    // nome buscado e renderiza a lista
+    onSearchFilterFunction = () => {
+        const filteredData = launches.filter(({ name }) =>
+            name.toLowerCase().includes(search.toLowerCase())
+        )
 
-    componentDidMount() {
-        this.props.fetchLaunches(this.state.page)
-        this.setState({ filteredDataSource: this.props.launches.launches })
-        this.setState({ masterDataSource: this.props.launches.launches })
-    }
-
-    shouldComponentRender() {
-        const { pending } = this.props;
-        if (pending === false) return false;
-        // more tests
-        return true;
-    }
-
-    searchFilterFunction = (text) => {
-        if (text) {
-            const newData = this.state.masterDataSource.filter(item => {
-                const itemData = item.name
-                    ? item.name.toUpperCase()
-                    : ''.toUpperCase()
-                const textData = text.toUpperCase()
-                return itemData.indexOf(textData) > -1;
-            })
-            this.setState({ filteredDataSource: newData })
-            this.setState({ search: text })
-        } else {
-            this.setState({ filteredDataSource: this.state.masterDataSource })
-            this.setState({ search: text })
-        }
-    }
-
-    render() {
         return (
-            <SafeAreaView style={{ flex: 1, backgroundColor: commonStyles.container.backgroundColor }}>
-                <View style={styles.header}>
-                    <View style={styles.imageHeader}>
-                        <Image source={require('../../assets/imgs/astronaut.jpg')} style={{ height: 150, width: 150 }}></Image>
-                    </View>
-                    <View style={styles.textHeader}>
-                        <Text style={styles.text}>Lançamentos</Text>
-                        <Text style={styles.text}>Hoje, 28 de Novembro de 2020</Text>
-                    </View>
-                </View>
-                <LaunchSearchBar onChangeText={(text) => this.searchFilterFunction(text)}
-                    onClear={(text) => this.searchFilterFunction('')}
-                    value={this.state.search} />
-                <View style={styles.content}>
-                    <FlatList data={this.state.filteredDataSource}
-                        numColumns={2}
-                        onEndReached={(dispatch) => this.loadMoreItems(dispatch)}
-                        keyExtractor={item => item.id}
-                        renderItem={({ item }) => {
-                            console.log(item.links.patch.small)
-                            return (
-                                <LaunchCard name={item.name} item={item} image={item.links.patch.small}></LaunchCard>
-                            )
-                        }}
-                    />
-                </View>
-            </SafeAreaView>
+            <View style={styles.content}>
+                <FlatList data={filteredData}
+                    numColumns={2}
+                    keyExtractor={item => `${item.id}`}
+                    onEndReached={loadWhenListEnds}
+                    renderItem={({ item }) => {
+                        return (
+                            <LaunchCard name={item.name} item={item} image={item.links.patch.small}></LaunchCard>
+                        )
+                    }}
+                />
+            </View>
         )
     }
+
+
+    return (
+        <SafeAreaView style={{ flex: 1, backgroundColor: commonStyles.container.backgroundColor }}>
+            <Header />
+            <LaunchSearchBar onChangeText={(text) => searchFilterFunction(text)}
+                onClear={(text) => searchFilterFunction('')}
+                value={search} />
+            {onSearchFilterFunction()}
+        </SafeAreaView>
+    )
+
 }
 
 const styles = StyleSheet.create({
-    header: {
-        flex: 3,
-        flexDirection: 'row',
-        backgroundColor: commonStyles.container.backgroundColor
-    },
-    imageHeader: {
-        flex: 5,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    textHeader: {
-        flex: 5,
-        justifyContent: 'center',
-        paddingRight: 20,
-        paddingBottom: 20
-    },
     content: {
         flex: 6,
         marginLeft: 10,
         marginRight: 10,
-        borderRadius: 5,
-        backgroundColor: '#b5b5b5'
+        borderRadius: 3,
+        backgroundColor: '#f2f2f2'
     },
-    principalItem: {
-        height: 150,
-        margin: 10,
-        padding: 10,
-        borderRadius: 10,
-        backgroundColor: "#e6e6e6",
-        alignItems: 'center',
-        justifyContent: 'center',
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 5,
-        },
-        shadowOpacity: 0.34,
-        shadowRadius: 6.27,
-        elevation: 10,
-    },
-    text: {
-        textAlign: 'right',
-        fontFamily: commonStyles.fontFamily,
-        color: '#FFF',
-        fontSize: 15,
-        alignItems: 'flex-end'
-    }
 })
-
-function mapStateToProps(state) {
-    return {
-        launches: state.launches
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        ...bindActionCreators({ fetchLaunches }, dispatch)
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(LaunchesList)
-
-
