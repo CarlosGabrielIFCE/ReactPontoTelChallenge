@@ -1,4 +1,4 @@
-import { FETCH_LAUNCHES_SUCCESS, FETCH_LAUNCHES_FAILURE, FETCHING_LAUNCHES } from '../../constants';
+import { FETCH_LAUNCHES_SUCCESS, FETCH_LAUNCHES_FAILURE, FETCHING_LAUNCHES } from '../../common/commonConstants'
 
 const initialState = {
     launches: [],

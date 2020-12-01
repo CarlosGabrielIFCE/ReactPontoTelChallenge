@@ -3,7 +3,7 @@ import { SafeAreaView } from 'react-native'
 import { Button } from 'react-native-elements'
 import YouTube from 'react-native-youtube'
 
-import commonStyles from '../commonStyles'
+import commonStyles from '../common/commonStyles'
 
 export default props => {
     const { item } = props.route.params

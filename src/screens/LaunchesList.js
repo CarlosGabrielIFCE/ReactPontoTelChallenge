@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { SafeAreaView, View, StyleSheet, FlatList } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 
-import commonStyles from '../commonStyles'
+import commonStyles from '../common/commonStyles'
 
 import { fetchLaunches } from '../store/actions/actions'
 
 import Header from '../components/LaunchesList/LaunchesListHeader'
-import LaunchCard from '../components/LaunchesList/LaunchCard'
-import LaunchSearchBar from '../components/LaunchesList/LaunchSearchBar'
+import LaunchCard from '../components/LaunchesList/LaunchesListCard'
+import LaunchesListSearchBar from '../components/LaunchesList/LaunchesListSearchBar'
 
 export default () => {
     // Declaração de Variáveis usando Hooks
@@ -43,8 +43,7 @@ export default () => {
 
         return (
             <View style={styles.content}>
-                <FlatList data={filteredData}
-                    numColumns={2}
+                <FlatList data={filteredData}                    
                     keyExtractor={item => `${item.id}`}
                     onEndReached={loadWhenListEnds}
                     renderItem={({ item }) => {
@@ -57,11 +56,10 @@ export default () => {
         )
     }
 
-
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: commonStyles.container.backgroundColor }}>
             <Header />
-            <LaunchSearchBar onChangeText={(text) => searchFilterFunction(text)}
+            <LaunchesListSearchBar onChangeText={(text) => searchFilterFunction(text)}
                 onClear={(text) => searchFilterFunction('')}
                 value={search} />
             {onSearchFilterFunction()}

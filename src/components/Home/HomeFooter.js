@@ -2,7 +2,7 @@ import React from 'react'
 import { View, TouchableWithoutFeedback, Text, StyleSheet } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
-import commonStyles from '../../commonStyles'
+import commonStyles from '../../common/commonStyles'
 
 export default () => {
     const navigation = useNavigation()

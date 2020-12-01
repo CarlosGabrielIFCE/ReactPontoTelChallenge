@@ -6,10 +6,10 @@ import LaunchesList from '../screens/LaunchesList'
 import LaunchItemWebView from '../screens/LaunchItemWebView'
 import LaunchItemYoutubeVideo from '../screens/LaunchItemYoutubeVideo'
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator()
 
-export default props => (
-    <Stack.Navigator initialRouteName="Home"
+export default () => (
+    <Stack.Navigator initialRouteName="LaunchesList"
         screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Home" component={Home}></Stack.Screen>
         <Stack.Screen name="LaunchesList" component={LaunchesList}></Stack.Screen>

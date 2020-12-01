@@ -1,9 +1,8 @@
 import React from 'react'
 import { SafeAreaView, View, StyleSheet } from 'react-native'
 
-import commonStyles from '../commonStyles'
+import commonStyles from '../common/commonStyles'
 
-//Importação dos componentes
 import Header from '../components/Home/HomeHeader'
 import FadeInViewImage from '../components/Home/HomeFadeInView'
 import Footer from '../components/Home/HomeFooter'

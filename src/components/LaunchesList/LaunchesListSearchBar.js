@@ -1,6 +1,7 @@
 import React from 'react'
 import { SearchBar } from 'react-native-elements'
-import commonStyles from '../../commonStyles'
+
+import commonStyles from '../../common/commonStyles'
 
 
 export default props => {

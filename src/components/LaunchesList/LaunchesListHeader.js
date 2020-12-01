@@ -1,14 +1,14 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { View, Image, Text, StyleSheet } from 'react-native'
 
-import commonStyles from '../../commonStyles'
+import commonStyles from '../../common/commonStyles'
 
 // Date import
 import moment from 'moment'
 import 'moment/locale/pt-br'
 
 export default () => {
-    const today = moment().locale('pt-br').format('ddd, D [de] MMMM')
+    const today = useMemo(() => moment().locale('pt-br').format('ddd, D [de] MMMM'))
     
     return (
         <View style={styles.header}>

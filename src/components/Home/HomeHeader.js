@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
-import commonStyles from '../../commonStyles'
+import commonStyles from '../../common/commonStyles'
 
 export default () => {
     return (

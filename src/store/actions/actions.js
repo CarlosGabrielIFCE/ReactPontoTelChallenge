@@ -1,5 +1,5 @@
-import { FETCH_LAUNCHES_SUCCESS, FETCH_LAUNCHES_FAILURE, FETCHING_LAUNCHES } from '../../constants';
-import axios from 'axios';
+import { FETCH_LAUNCHES_SUCCESS, FETCH_LAUNCHES_FAILURE, FETCHING_LAUNCHES, apiBaseUrl } from '../../common/commonConstants'
+import axios from 'axios'
 
 function getLaunches() {
     return {
@@ -22,7 +22,6 @@ function getLaunchesError(err) {
 }
 
 export function fetchLaunches(page) {
-    console.log('oi')
     return (dispatch) => {
         const data = {
             query: {},
@@ -32,7 +31,7 @@ export function fetchLaunches(page) {
             }
         }
         dispatch(getLaunches())
-        axios.post('https://api.spacexdata.com/v4/launches/query', data)
+        axios.post(`${apiBaseUrl}/launches/query`, data)
             .then(function (response) {
                 return (dispatch(getLaunchesSuccess(response.data.docs)))
             })

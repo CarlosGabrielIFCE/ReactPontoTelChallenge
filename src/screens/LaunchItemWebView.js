@@ -1,9 +1,9 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet, View } from 'react-native'
-import { WebView } from 'react-native-webview';
+import { SafeAreaView } from 'react-native'
+import { WebView } from 'react-native-webview'
 import { Button } from 'react-native-elements'
 
-import commonStyles from '../commonStyles'
+import commonStyles from '../common/commonStyles'
 
 export default props => {
   const { item } = props.route.params
