@@ -9,7 +9,7 @@ import LaunchItemYoutubeVideo from '../screens/LaunchItemYoutubeVideo'
 const Stack = createStackNavigator()
 
 export default () => (
-    <Stack.Navigator initialRouteName="LaunchesList"
+    <Stack.Navigator initialRouteName="Home"
         screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Home" component={Home}></Stack.Screen>
         <Stack.Screen name="LaunchesList" component={LaunchesList}></Stack.Screen>

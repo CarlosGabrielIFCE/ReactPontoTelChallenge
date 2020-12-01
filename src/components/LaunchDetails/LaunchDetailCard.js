@@ -12,7 +12,7 @@ export default props => {
         <View style={styles.contentCard}>
             <Image source={{ uri: props.item.links.patch.small }} style={styles.image} />
             <Text style={styles.title}>{props.item.name}</Text>
-            <Text style={styles.subtitle}>Subtitle</Text>
+            <Text style={styles.subtitle}>Lançamento efetuado: { props.item.success? 'Sim' : 'Não'}</Text>
             <TouchableWithoutFeedback onPress={() => navigation.navigate('LaunchItemYoutubeVideo', { item: props.item })}>
                 <Text style={[styles.paragraph]}>Assistir a um vídeo sobre o lançamento</Text>
             </TouchableWithoutFeedback>

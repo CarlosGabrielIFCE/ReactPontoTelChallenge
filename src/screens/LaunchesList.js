@@ -48,7 +48,7 @@ export default () => {
                     onEndReached={loadWhenListEnds}
                     renderItem={({ item }) => {
                         return (
-                            <LaunchCard name={item.name} launched={item.sucess} item={item} image={item.links.patch.small}></LaunchCard>
+                            <LaunchCard name={item.name} launched={item.success} item={item} image={item.links.patch.small}></LaunchCard>
                         )
                     }}
                 />
