@@ -53,9 +53,8 @@ bibliotecas [jest](https://github.com/react-native-community/react-native-webvie
 ### Demonstração
 Para ilustrar a utilização do aplicativo, seguem abaixo alguns prints.
 <div class="row">
-  <img src="https://imgur.com/9qc7TEU" width="20%" height="20%" />
-  <img src="https://imgur.com/6RHtBC0" width="20%" height="20%" />
-  <img src="https://imgur.com/undefined" width="20%" height="20%" />
-  <img src="https://imgur.com/d56Gbca" width="20%" height="20%" />
-  <img src="https://imgur.com/oLdMk7C" width="20%" height="20%" />
+  <img src="https://i.imgur.com/9qc7TEU.png" width="30%" height="30%" />
+  <img src="https://i.imgur.com/6RHtBC0.png" width="30%" height="30%" />
+  <img src="https://i.imgur.com/d56Gbca.png" width="30%" height="30%" />
+
 <div>
