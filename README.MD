@@ -9,28 +9,22 @@ lançamento, assim como aplicar um filtro de busca pelos resultados encontrados.
 ## Instalação
   - Baixe o arquivo ZIP do repositório ou faça um clone deste em sua máquina.
   - Escolha o package manager que irá utilizar para baixar as dependências
-  - Caso esteja utilizando yarn, rode o comando:
-    ```sh
-       yarn
-    ```
-    Após isso, é só subir o projeto com o comando:
-    ```sh
-       react-native run-android
-    ```
 
   - Caso esteja utilizando npm, rode o comando:
     ```sh
        npm i
     ```
-    Após isso, é só subir o projeto com o comando:
+    Após isso, para executar a aplicação rode :
     ```sh
-       npx react-native run-android
+       npm run android 
     ```
 
     Para rodar os testes da aplicação, basta rodar:
     ```sh
        jest nomeTeste
     ```
+
+    ***Certifique-se de que o jest está instalado em sua máquina.***
 
 ### Detalhes
 
