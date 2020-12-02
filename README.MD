@@ -52,4 +52,4 @@ bibliotecas [jest](https://github.com/react-native-community/react-native-webvie
 
 ### Demonstração
 
-Para ilustrar a utilização do aplicativo, acesse através desse [link](https://imgur.com/a/gDFLyBU)
+Para ilustrar a utilização do aplicativo, acesse através desse [link](https://imgur.com/a/gDFLyBU).
